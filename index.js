@@ -27,6 +27,10 @@ app.get('/ping', (req, res) => {
     res.status(200).send('Bot is alive');
 });
 
+app.listen(PORT, () => {
+    console.log(`🌍 Keep-alive server running on https://discord-bots-pnzd.onrender.com:${PORT}`);
+});
+
 schedule.scheduleJob('*/30 * * * * *', async () => {
     const endpoints = [
         { url: `https://discord-bots-pnzd.onrender.com:${PORT}/ping`, name: 'Discord Bots' },

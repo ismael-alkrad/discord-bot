@@ -6,6 +6,8 @@ const axios = require('axios');
 
 const app = express();
 
+const PORT = process.env.PORT || 3000;
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,

@@ -29,7 +29,7 @@ app.get('/ping', (req, res) => {
 
 schedule.scheduleJob('*/30 * * * * *', async () => {
     const endpoints = [
-        { url: 'https://discord-bots-pnzd.onrender.com/ping', name: 'Discord Bots' },
+        { url: `https://discord-bots-pnzd.onrender.com:${PORT}/ping`, name: 'Discord Bots' },
         { url: 'https://myhome-realestate.onrender.com', name: 'MyHome Realestate' }
     ];
 

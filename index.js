@@ -26,12 +26,18 @@ app.get('/ping', (req, res) => {
 });
 
 schedule.scheduleJob('*/30 * * * * *', async () => {
-    try {
-        await axios.get(`https://discord-bots-pnzd.onrender.com/ping`);
-        await axios.get(`https://myhome-realestate.onrender.com`);
+    const endpoints = [
+        { url: 'https://discord-bots-pnzd.onrender.com/ping', name: 'Discord Bots' },
+        { url: 'https://myhome-realestate.onrender.com', name: 'MyHome Realestate' }
+    ];
 
-    } catch (error) {
-        console.error('❌ Keep-alive request failed:', error.message);
+    for (const endpoint of endpoints) {
+        try {
+            await axios.get(endpoint.url);
+            console.log(`✅ Successfully pinged ${endpoint.name}`);
+        } catch (error) {
+            console.error(`❌ Failed to ping ${endpoint.name}: ${error.message}`);
+        }
     }
 });
 

@@ -1,5 +1,10 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits } = require('discord.js');
+const express = require('express');
+const schedule = require('node-schedule');
+const axios = require('axios');
+
+const app = express();
 
 const client = new Client({
     intents: [
@@ -14,6 +19,23 @@ const lastMoved = new Map();
 client.once('ready', () => {
     console.log(`✅ Bot is online as ${client.user.tag}`);
 });
+
+app.get('/ping', (req, res) => {
+    console.log(`🔄 Received keep-alive ping at ${new Date().toISOString()}`);
+    res.status(200).send('Bot is alive');
+});
+
+schedule.scheduleJob('*/30 * * * * *', async () => {
+    try {
+        await axios.get(`https://discord-bots-pnzd.onrender.com/ping`);
+        await axios.get(`https://myhome-realestate.onrender.com`);
+
+    } catch (error) {
+        console.error('❌ Keep-alive request failed:', error.message);
+    }
+});
+
+
 
 client.on('voiceStateUpdate', async (oldState, newState) => {
     const guild = client.guilds.cache.get(process.env.GUILD_ID);

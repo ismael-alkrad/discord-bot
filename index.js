@@ -33,7 +33,7 @@ app.listen(PORT, () => {
 
 schedule.scheduleJob('*/30 * * * * *', async () => {
     const endpoints = [
-        { url: `https://discord-bots-pnzd.onrender.com:${PORT}/ping`, name: 'Discord Bots' },
+        { url: `https://discord-bots-pnzd.onrender.com/ping`, name: 'Discord Bots' },
         { url: 'https://myhome-realestate.onrender.com', name: 'MyHome Realestate' }
     ];
 
@@ -42,7 +42,7 @@ schedule.scheduleJob('*/30 * * * * *', async () => {
             await axios.get(endpoint.url);
             console.log(`✅ Successfully pinged ${endpoint.name}`);
         } catch (error) {
-            console.error(`❌ Failed to ping ${endpoint.name}: ${error.message}`);
+            console.error(`❌ Failed to ping ${endpoint.name}: ${error.response}`);
         }
     }
 });

@@ -34,7 +34,8 @@ app.listen(PORT, () => {
 schedule.scheduleJob('*/30 * * * * *', async () => {
     const endpoints = [
         { url: `https://discord-bots-pnzd.onrender.com/ping`, name: 'Discord Bots' },
-        { url: 'https://myhome-realestate.onrender.com', name: 'MyHome Realestate' }
+        { url: 'https://myhome-realestate.onrender.com', name: 'MyHome Realestate' },
+        { url: 'https://store-back-1mhx.onrender.com/ping', name: 'Store Backend' }
     ];
 
     for (const endpoint of endpoints) {
